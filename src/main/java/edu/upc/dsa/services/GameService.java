@@ -243,4 +243,37 @@ public class GameService {
         VideoListDTO videoList = new VideoListDTO(videos);
         return Response.status(200).entity(videoList).build();
     }
+
+    @GET
+    @Path("/badges/{userId}/badges")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserBadges(@PathParam("userId") String userId) {
+        List<Badge> badges = new ArrayList<>();
+
+        if ("xxxxxx".equals(userId)) {
+            badges.add(new Badge("master del universo",
+                    "https://cdn.pixabay.com/photo/2017/07/11/15/51/kermit-2493979_1280.png"));
+            badges.add(new Badge("rey/reina de xxx",
+                    "https://ejemplo.com/avatar1.png"));
+        }
+        else if ("yyyyy".equals(userId)) {
+            badges.add(new Badge("becario enfurismado",
+                    "https://cdn.pixabay.com/photo/2017/07/11/15/51/kermit-2493979_1280.png"));
+            badges.add(new Badge("el bachiller",
+                    "https://ejemplo.com/avatar2.png"));
+        }
+        else if ("Test".equals(userId)) {
+            badges.add(new Badge("insignia especial para Test",
+                    "https://cdn.pixabay.com/photo/2017/07/11/15/51/kermit-2493979_1280.png"));
+            badges.add(new Badge("otra insignia de prueba",
+                    "https://cdn.pixabay.com/photo/2017/07/11/15/51/kermit-2493979_1280.png"));
+        }
+        else {
+            badges.add(new Badge("insignia predeterminada",
+                    "https://ejemplo.com/default.png"));
+        }
+
+        System.out.println("Retornando insignias para: " + userId);
+        return Response.status(200).entity(new edu.upc.dsa.models.BadgeListDTO(badges)).build();
+    }
 }
